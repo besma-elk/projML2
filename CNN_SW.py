@@ -11,7 +11,7 @@ from keras.utils import to_categorical
 
 # This model consists of a basic CNN with a Sliding Window to generate random patches for the training period.
 # The window_size-patch_size should be even
-# No bagging is done and no data balancing is done
+# No bagging is done
 
 class CNN_SW:
     
@@ -19,7 +19,7 @@ class CNN_SW:
         self.window_size = 64
         self.patch_size = 16
         self.training_stride = 8
-        self.num_epochs = 1
+        self.num_epochs = 20
         self.batch_size = 64
         self.pad_val = int((self.window_size-self.patch_size)/2)  
         self.build_model()
@@ -62,6 +62,7 @@ class CNN_SW:
         self.model.compile(loss='categorical_crossentropy',
                       optimizer=Adam(lr=0.001),
                       metrics=['accuracy'])
+        
 
         np.random.seed(1)
             
@@ -121,5 +122,5 @@ class CNN_SW:
             labels = gt_to_patches(gt_images, self.patch_size, self.patch_size, self.patch_size)
             acc = numpy.count_nonzero(numpy.subtract(hard_predictions,labels))/(2*len(labels))
             print("Prediction accuracy: %.2f%%" % ((1-acc)*100))
-        
+        print(predictions,hard_predictions)
         return predictions , hard_predictions

@@ -17,10 +17,10 @@ class CNN:
     
     def __init__(self):
         self.patch_size = 16
-        self.bagging_size = 3
+        self.bagging_size = 5
         self.bagging_ratio = 0.5
         self.training_stride = 8
-        self.num_epochs = 10
+        self.num_epochs = 64
         self.batch_size = 16
         self.models = []
         self.build_models()
@@ -122,5 +122,4 @@ class CNN:
             labels = gt_to_patches(gt_images, self.patch_size, self.patch_size, self.patch_size)
             acc = numpy.count_nonzero(numpy.subtract(hard_predictions,labels))/(2*len(labels))
             print("Prediction accuracy: %.2f%%" % ((1-acc)*100))
-        
         return predictions , hard_predictions    

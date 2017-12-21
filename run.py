@@ -5,14 +5,14 @@ import keras
 
 
 
-RESTORE = 0 # Set to 1 if the weights are to be loaded
-WITH_SUBMISSION = 0 # Set to 1 if a Kaggle submission is to be created
+RESTORE = 1 # Set to 1 if the weights are to be loaded
+WITH_SUBMISSION = 1 # Set to 1 if a Kaggle submission is to be created
 WITH_SAVE = 0 # Set to 1 if the weights are to be savec after the training (ie RESTORE has to be 0)
-NUM_TRAIN_IMAGES = 50
+NUM_TRAIN_IMAGES = 100
 
 # Uncomment second line if you wish to use the CNN model (without sliding window)
-model = CNN_SW()
-#model = CNN()
+#model = CNN_SW()
+model = CNN()
 
 if RESTORE:
     model.load() 
